@@ -47,7 +47,7 @@ jobs:
           platforms: linux/arm,linux/arm64,linux/amd64
           push: true
           tags: |
-            ppoiuty/xrayr:${{ steps.get_version.outputs.VERSION }}
-            ppoiuty/xrayr:latest
+            dawenhaozx/XrayR-for-AirGo:${{ steps.get_version.outputs.VERSION }}
+            dawenhaozx/XrayR-for-AirGo:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
