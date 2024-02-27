@@ -10,8 +10,11 @@ RUN go build -v -o XrayR -trimpath -ldflags "-s -w -buildid="
 FROM  alpine
 # 安装必要的工具包
 RUN  apk --update --no-cache add tzdata ca-certificates \
-    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-RUN mkdir /etc/XrayR/
+    && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
+    && mkdir /etc/XrayR/ \
+    && apk add wget \
+    && wget -q -O /etc/XrayR/geoip.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geoip.dat \
+    && wget -q -O /etc/XrayR/geosite.dat https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat
 COPY --from=builder /app/XrayR /usr/local/bin
 
 ENTRYPOINT [ "XrayR", "--config", "/etc/XrayR/config.yml"]
